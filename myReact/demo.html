@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- <button class="like-btn">
+            <span class="like-text">点赞</span>
+            <span>👍</span>
+        </button> -->
+    </div>
+
+    <script>
+        // const button = document.querySelector('.like-btn');
+        // const buttonText = document.querySelector('.like-text');
+        // let isLiked = false;
+
+        // 方式一
+        // button.addEventListener('click',function(){
+        //     isLiked=!isLiked;
+        //     if(isLiked){
+        //         buttonText.innerHTML='取消'
+        //     }else{
+        //         buttonText.innerHTML='点赞'
+        //     }
+        // },false)
+
+        // 方式二
+
+        // 传递字符串，返回html结构
+        const createDOMFromString = (domString) => {
+            const div = document.createElement('div');
+            div.innerHTML = domString;
+            return div
+        }
+
+        class likeButton {
+
+            constructor(){
+                this.state={isLiked:false}
+            }
+
+            changeLikeText(){
+                const likeText=this.el.querySelector('.like-text');
+                this.state.isLiked=!this.state.isLiked;
+                likeText.innerHTML=this.state.isLiked?'取消':'点赞'
+            }
+            render() {
+                this.el = createDOMFromString(`<button id="like-btn">
+                <span class="like-text">点赞</span>
+                <span>👍</span>
+                </button>`);
+                this.el.addEventListener('click', this.changeLikeText.bind(this), false);
+                return this.el
+            }
+
+        }
+
+        const wrapper = document.querySelector('.wrapper');
+
+        // btn1
+
+        const likeButton1 = new likeButton();
+        wrapper.appendChild(likeButton1.render());
+
+        // btn2
+
+        const likeButton2 = new likeButton();
+        wrapper.appendChild(likeButton2.render())
+    </script>
+</body>
+
+</html>

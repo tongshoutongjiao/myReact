@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="wrapper">
+
+    </div>
+    <script src="./fnDemo2.js"></script>
+    <script>
+        let wrapper = document.querySelector('.wrapper')
+        let btn1 = new likeButton();
+        let btn2 = new likeButton();
+        wrapper.appendChild(btn1.render()) // 第一次插入dom元素
+
+        btn1.onStateChange=(oldEl,newEl)=>{
+            wrapper.insertBefore(newEl,oldEl);// 插入新元素
+            wrapper.removeChild(oldEl)// 删除旧元素
+        }
+
+        wrapper.appendChild(btn2.render())
+        btn2.onStateChange=(oldEl,newEl)=>{
+            wrapper.insertBefore(newEl,oldEl);// 插入新元素
+            wrapper.removeChild(oldEl)// 删除旧元素
+        }
+    </script>
+
+</body>
+
+</html>
